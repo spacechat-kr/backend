@@ -1,0 +1,9 @@
+mybatis:
+  mapper-locations: mapper/*.xml
+
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    jdbc-url: jdbc:mysql://{MYSQL_IP}:{MYSQL_PORT}/spacechat?characterEncoding=utf8
+    username: {MYSQL_USERNAME}
+    password: {MYSQL_PASSWORD}

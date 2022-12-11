@@ -17,7 +17,7 @@ public class MockTestController {
 
     @GetMapping("/lastUpdatedDt")
     public ApiResponse test(){
-        return new ApiResponse(200, lastUpdatedDt.toString());
+        return new ApiResponse("200", lastUpdatedDt.toString());
     }
 
 }

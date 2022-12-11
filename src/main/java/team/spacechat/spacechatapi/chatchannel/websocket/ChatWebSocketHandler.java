@@ -16,8 +16,8 @@ import team.spacechat.spacechatapi.chatchannel.service.ChatChannelService;
 @AllArgsConstructor
 public class ChatWebSocketHandler extends TextWebSocketHandler {
 
-    ChatChannelService chatChannelService;
-    ObjectMapper objectMapper;
+    private ChatChannelService chatChannelService;
+    private ObjectMapper objectMapper;
 
     @Override
     protected void handleTextMessage(WebSocketSession session, TextMessage message) throws Exception {
