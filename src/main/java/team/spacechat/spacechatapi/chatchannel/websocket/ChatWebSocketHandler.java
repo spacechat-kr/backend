@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
+import org.springframework.web.socket.CloseStatus;
 import org.springframework.web.socket.TextMessage;
 import org.springframework.web.socket.WebSocketSession;
 import org.springframework.web.socket.handler.TextWebSocketHandler;
@@ -24,11 +25,18 @@ public class ChatWebSocketHandler extends TextWebSocketHandler {
 
         ChatSocketMsg chatSocketMsg = objectMapper.readValue(receiveMsg, ChatSocketMsg.class);
 
-        log.info(session.getId().toString());
-        log.info(receiveMsg);
+        log.info("session: {}, receiveMsg: {}", session.getId(), receiveMsg);
 
         chatChannelService.sendMsgToSameChatChannelSessions(chatSocketMsg, session);
 
     }
+
+    @Override
+    public void afterConnectionClosed(WebSocketSession session, CloseStatus status) throws Exception {
+        log.info("Session {} closed with status {}", session, status);
+
+        chatChannelService.deleteSession(session);
+    }
+
 
 }
