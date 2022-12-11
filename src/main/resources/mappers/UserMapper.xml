@@ -6,11 +6,21 @@
 <mapper namespace="team.spacechat.spacechatapi.user.mapper.UserMapper">
 
     <insert id="createUser">
-        insert into tb_user(user_id, name) values(#{userId}, #{name})
+        insert into tb_user(user_id, name)
+        values(#{userId}, #{name})
     </insert>
 
-    <update id="updateUser" parameterType="User">
-        update tb_user set name=#{name} where user_id=#{userId}
+    <update id="updateUser">
+        update tb_user
+        set name=#{name}
+        where user_id=#{userId}
     </update>
+
+    <select id="getUserByUserId" resultType="team.spacechat.spacechatapi.user.dto.User">
+        select
+        user_id, name
+        from tb_user
+        where user_id=#{userId}
+    </select>
 
 </mapper>

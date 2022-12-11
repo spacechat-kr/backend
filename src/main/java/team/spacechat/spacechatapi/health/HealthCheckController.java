@@ -1,4 +1,4 @@
-package team.spacechat.spacechatapi.mocktest;
+package team.spacechat.spacechatapi.health;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -9,13 +9,13 @@ import team.spacechat.spacechatapi.common.ApiResponse;
 import java.time.LocalDateTime;
 
 @RestController
-@RequestMapping(value = "/api/mockTest")
+@RequestMapping(value = "/api")
 @RequiredArgsConstructor
-public class MockTestController {
+public class HealthCheckController {
 
     private LocalDateTime lastUpdatedDt = LocalDateTime.now();
 
-    @GetMapping("/lastUpdatedDt")
+    @GetMapping("/health")
     public ApiResponse test(){
         return new ApiResponse("200", lastUpdatedDt.toString());
     }

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="team.spacechat.spacechatapi.post.mapper.PostMapper">
+
+    <insert id="createPost">
+        insert into tb_post(post_id, user_id, title, description, created_at, latitude, longitude, icon_path)
+        values(#{postId}, #{userId}, #{title}, #{description}, NOW(), #{latitude}, #{longitude}, #{iconPath})
+    </insert>
+
+    <select id="getPostListByLocation" resultType="team.spacechat.spacechatapi.post.dto.Post">
+        select *
+        from tb_post
+        where
+        latitude > #{startLatitude} and longitude > #{startLongitude}
+        and latitude <![CDATA[<]]> #{endLatitude} and longitude <![CDATA[<]]> #{endLongitude}
+        and DATE(created_at) > DATE(DATE_SUB(NOW(), INTERVAL 7 DAY))
+    </select>
+
+</mapper>

@@ -3,7 +3,7 @@ package team.spacechat.spacechatapi.common;
 public class ResponseGenerator {
 
     public static ApiResponse ok(){
-        return new ApiResponse("200", "ok");
+        return new ApiResponse("200", "success");
     }
 
     public static ApiResponse ok(Object data){

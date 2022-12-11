@@ -6,8 +6,10 @@ import team.spacechat.spacechatapi.user.dto.User;
 @Mapper
 public interface UserMapper {
 
-    public void createUser(User user);
+    int createUser(User user);
 
-    public void updateUser(User user);
+    int updateUser(User user);
+
+    User getUserByUserId(String userId);
 
 }
