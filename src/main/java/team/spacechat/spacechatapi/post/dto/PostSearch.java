@@ -5,10 +5,10 @@ import lombok.Data;
 @Data
 public class PostSearch {
 
-    String userId;
-    double startLatitude;
-    double endLatitude;
-    double startLongitude;
-    double endLongitude;
+    private String userId;
+    private double startLatitude;
+    private double endLatitude;
+    private double startLongitude;
+    private double endLongitude;
 
 }

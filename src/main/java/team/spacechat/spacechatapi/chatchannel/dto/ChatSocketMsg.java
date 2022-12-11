@@ -11,6 +11,19 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class ChatSocketMsg {
-    private String roomId;
-    private String message;
+
+    private String chatRoomId;
+    private String senderId;
+    private String msgType;
+    private String msgContent;
+
+    public ChatMsg toChatMsg() {
+        return ChatMsg.builder()
+                .chatRoomId(this.chatRoomId)
+                .senderId(this.senderId)
+                .msgContent(this.msgContent)
+                .msgType(this.msgType)
+                .build();
+    }
+
 }

@@ -18,17 +18,21 @@ import java.util.stream.Collectors;
 @Service
 @AllArgsConstructor
 public class ChatChannelService {
+
     private Map<String, List<WebSocketSession>> chatChannelMap;
+    private ChatMsgService chatMsgService;
 
     public void sendMsgToSameChatChannelSessions(ChatSocketMsg chatSocketMsg, WebSocketSession session) {
-        String roomId = chatSocketMsg.getRoomId();
+        String roomId = chatSocketMsg.getChatRoomId();
         String sessionId = session.getId();
 
-        if (chatChannelMap.get(roomId) == null){
+        chatMsgService.insertChatMsg(chatSocketMsg);
+
+        if (chatChannelMap.get(roomId) == null) {
             insertNewChatChannel(roomId, session);
         }
 
-        if (!chatChannelMap.get(roomId).contains(session)){
+        if (!chatChannelMap.get(roomId).contains(session)) {
             insertNewSession(roomId, session);
         }
 
@@ -37,9 +41,9 @@ public class ChatChannelService {
                         .filter(ws -> ws.getId() != sessionId)
                         .collect(Collectors.toList());
 
-        try{
-            sendTextMessage(receiverSessionList, chatSocketMsg.getMessage());
-        }catch (Exception e){
+        try {
+            sendTextMessage(receiverSessionList, chatSocketMsg.getMsgContent());
+        } catch (Exception e) {
             log.error("failed to send text message", e);
             deleteSession(receiverSessionList);
         }
@@ -47,17 +51,17 @@ public class ChatChannelService {
     }
 
     public void deleteSession(List<WebSocketSession> sessionList) {
-        for (WebSocketSession session: sessionList){
+        for (WebSocketSession session : sessionList) {
             deleteSession(session);
         }
     }
 
-    public void deleteSession(WebSocketSession session){
+    public void deleteSession(WebSocketSession session) {
         Set<String> keySet = chatChannelMap.keySet();
 
         for (String key : keySet) {
             List<WebSocketSession> sessionList = chatChannelMap.get(key);
-            if (sessionList.contains(session)){
+            if (sessionList.contains(session)) {
                 List<WebSocketSession> filteredSessionList = sessionList.stream()
                         .filter(ws -> ws.getId() != session.getId())
                         .collect(Collectors.toList());
@@ -67,20 +71,21 @@ public class ChatChannelService {
         }
     }
 
-    private void insertNewChatChannel(String roomId, WebSocketSession session){
+    private void insertNewChatChannel(String roomId, WebSocketSession session) {
         List<WebSocketSession> newSessionList = new ArrayList<>();
         newSessionList.add(session);
         chatChannelMap.put(roomId, newSessionList);
     }
 
-    private void insertNewSession(String roomId, WebSocketSession session){
+    private void insertNewSession(String roomId, WebSocketSession session) {
         List<WebSocketSession> sessionList = chatChannelMap.get(roomId);
         sessionList.add(session);
     }
 
+
     private void sendTextMessage(List<WebSocketSession> sessionList, String message) throws IOException {
         TextMessage sendMsg = new TextMessage(message);
-        for (WebSocketSession session : sessionList){
+        for (WebSocketSession session : sessionList) {
             session.sendMessage(sendMsg);
         }
     }

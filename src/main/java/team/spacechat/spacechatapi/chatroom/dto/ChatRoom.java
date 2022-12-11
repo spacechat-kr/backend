@@ -9,9 +9,9 @@ import java.time.LocalDateTime;
 @Builder
 public class ChatRoom {
 
-    String chatRoomId;
-    String postId;
-    String joinerId;
-    LocalDateTime createdAt;
+    private String chatRoomId;
+    private String postId;
+    private String joinerId;
+    private LocalDateTime createdAt;
 
 }

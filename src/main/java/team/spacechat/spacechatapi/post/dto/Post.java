@@ -9,13 +9,13 @@ import java.time.LocalDateTime;
 @Builder
 public class Post {
 
-    String postId;
-    String userId;
-    String title;
-    String description;
-    LocalDateTime createdAt;
-    double latitude;
-    double longitude;
-    String iconPath;
+    private String postId;
+    private String userId;
+    private String title;
+    private String description;
+    private LocalDateTime createdAt;
+    private double latitude;
+    private double longitude;
+    private String iconPath;
 
 }
