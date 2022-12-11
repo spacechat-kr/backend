@@ -20,25 +20,26 @@ public class UserService {
 
         int result = userMapper.createUser(newUser);
 
-        if (result == 1){
+        if (result == 1) {
             return true;
-        } else{
+        } else {
             throw new Exception();
         }
 
     }
 
-    public User updateUser(User user){
+    public User updateUser(User user) {
 
         userMapper.updateUser(user);
 
         return user;
     }
 
-    public User getUserByUserId(String userId){
+    public User getUserByUserId(String userId) {
 
         User user = userMapper.getUserByUserId(userId);
 
         return user;
     }
+
 }

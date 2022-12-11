@@ -10,6 +10,13 @@
         values(#{postId}, #{userId}, #{title}, #{description}, NOW(), #{latitude}, #{longitude}, #{iconPath})
     </insert>
 
+    <select id="getPostByPostId" resultType="team.spacechat.spacechatapi.post.dto.Post">
+        select *
+        from tb_post
+        where
+        post_id = #{postId}
+    </select>
+
     <select id="getPostListByLocation" resultType="team.spacechat.spacechatapi.post.dto.Post">
         select *
         from tb_post

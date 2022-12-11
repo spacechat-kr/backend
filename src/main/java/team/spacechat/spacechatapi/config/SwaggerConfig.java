@@ -45,7 +45,7 @@ public class SwaggerConfig {
         return new ApiInfoBuilder()
                 .title("API")
                 .description("REST API")
-                .version("0.0.4-SNAPSHOT")
+                .version("0.0.5-SNAPSHOT")
                 .build();
     }
 }

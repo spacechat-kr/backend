@@ -2,10 +2,7 @@ package team.spacechat.spacechatapi.post.controller;
 
 import io.swagger.annotations.ApiOperation;
 import lombok.AllArgsConstructor;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import team.spacechat.spacechatapi.common.ApiResponse;
 import team.spacechat.spacechatapi.common.ResponseGenerator;
 import team.spacechat.spacechatapi.post.dto.Post;
@@ -30,8 +27,15 @@ public class PostController {
 
     @PostMapping("/getPostByLocation")
     @ApiOperation("위/경도로 필터한 포스트 조회 : *")
-    public ApiResponse getPostByLocation(@RequestBody PostSearch postSearch) throws Exception {
+    public ApiResponse getPostByLocation(@RequestBody PostSearch postSearch) {
         List<Post> result = postService.getPostListByLocation(postSearch);
+        return ResponseGenerator.ok(result);
+    }
+
+    @GetMapping("/{postId}")
+    @ApiOperation("포스트 Id로 포스트 조회 : *")
+    public ApiResponse getPostByPostId(@PathVariable("postId") String postId) throws Exception {
+        Post result = postService.getPostByPostId(postId);
         return ResponseGenerator.ok(result);
     }
 

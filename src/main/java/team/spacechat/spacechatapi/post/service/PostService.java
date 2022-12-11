@@ -29,14 +29,19 @@ public class PostService {
 
         int result = postMapper.createPost(newPost);
 
-        if (result == 1){
+        if (result == 1) {
             return true;
-        } else{
+        } else {
             throw new Exception();
         }
     }
 
-    public List<Post> getPostListByLocation(PostSearch postSearch){
+    public Post getPostByPostId(String postId) {
+        Post post = postMapper.getPostByPostId(postId);
+        return post;
+    }
+
+    public List<Post> getPostListByLocation(PostSearch postSearch) {
         List<Post> postList = postMapper.getPostListByLocation(postSearch);
         return postList;
     }

@@ -12,7 +12,7 @@ import team.spacechat.spacechatapi.user.service.UserService;
 @AllArgsConstructor
 @RequestMapping("/user")
 public class UserController {
-
+    
     private UserService userService;
 
     @PostMapping("/create")
@@ -24,14 +24,14 @@ public class UserController {
 
     @PostMapping("/update")
     @ApiOperation("유저 정보 수정 : *")
-    public ApiResponse updateUser(@RequestBody User user){
+    public ApiResponse updateUser(@RequestBody User user) {
         User result = userService.updateUser(user);
         return ResponseGenerator.ok(result);
     }
 
     @GetMapping
     @ApiOperation("유저 아이디로 유저 정보 조회 : *")
-    public ApiResponse getUserByUserId(String userId){
+    public ApiResponse getUserByUserId(String userId) {
         User result = userService.getUserByUserId(userId);
         return ResponseGenerator.ok(result);
     }

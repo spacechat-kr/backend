@@ -10,6 +10,9 @@ import java.util.List;
 public interface PostMapper {
 
     int createPost(Post post);
+
     List<Post> getPostListByLocation(PostSearch postSearch);
+
+    Post getPostByPostId(String postId);
 
 }
